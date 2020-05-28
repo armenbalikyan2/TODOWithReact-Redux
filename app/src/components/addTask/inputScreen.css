@@ -1,0 +1,13 @@
+.addTask {
+    display: flexbox;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.editable-row .ant-form-explain {
+    position: absolute;
+    font-size: 12px;
+    margin-top: -4px;
+}
