@@ -17,6 +17,7 @@ const TaskListPage = (props) => {
 
   useEffect(() => {
     props.getDataLoading();
+    console.log(props.tasks ? props.tasks : undefined);
   }, []);
   console.log(props.tasks)
 
