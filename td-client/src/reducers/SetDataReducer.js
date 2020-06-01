@@ -6,10 +6,10 @@ import {
 
 const initialState = {
   settingData: false,
-  data: [],
+  taskData: [],
 };
 
-export function SetDataReducer(state = initialState, action) {
+export function setDataReducer(state = initialState, action) {
   switch (action.type) {
     case SET_DATA_LOADING:
       return {
@@ -20,7 +20,7 @@ export function SetDataReducer(state = initialState, action) {
       return {
         ...state,
         settingData: false,
-        data: action.payload,
+        taskData: action.payload,
       };
     case SET_DATA_FAILURE:
       return {

@@ -5,11 +5,11 @@ import {
 } from '../actions';
 
 const initialState = {
-  gettingUser: false,
-  userData: [],
+  gettingTask: false,
+  taskData: [],
 };
 
-export  function GetDataReducer(state = initialState, action) {
+export function getDataReducer(state = initialState, action) {
   switch (action.type) {
     case GET_DATA_LOADING:
       return {
@@ -20,7 +20,7 @@ export  function GetDataReducer(state = initialState, action) {
       return {
         ...state,
         gettingUser: false,
-        userData: action.payload,
+        taskData: action.payload,
       };
     case GET_DATA_FAILURE:
       return {

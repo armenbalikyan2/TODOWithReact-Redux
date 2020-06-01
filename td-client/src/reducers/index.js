@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { RemoveDataReducer } from './RemoveDataReducer';
-import { GetDataReducer } from './GetDataReducer';
-import { SetDataReducer } from './SetDataReducer';
+import { removeDataReducer } from './removeDataReducer';
+import { getDataReducer } from './getDataReducer';
+import { setDataReducer } from './setDataReducer';
 
 export const rootReducer = combineReducers({
-  tasks: GetDataReducer,
-  setTask: SetDataReducer,
-  removeTask: RemoveDataReducer,
+  tasks: getDataReducer,
+  setTask: setDataReducer,
+  removeTask: removeDataReducer,
 });
 
 export default rootReducer;

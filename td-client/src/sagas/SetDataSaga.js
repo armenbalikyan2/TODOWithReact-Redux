@@ -1,9 +1,9 @@
-import { take, put, call, takeLatest } from 'redux-saga/effects';
-import { getTasks, addTask } from '../api/TaskApi';
-import { SET_DATA_LOADING, setDataFailure, setDataSuccess } from '../actions';
+import { put, takeLatest } from 'redux-saga/effects';
+import { addTask } from '../api/taskApi';
+import { SET_DATA_LOADING, setDataSuccess } from '../actions';
 import { task } from '../components/addTask/AddingTaskPage';
 
-function* SetDataSaga() {
+function* setDataSaga() {
   if (task !== undefined && task !== null) {
     const response = yield addTask(task);
     const data = response.data;
@@ -12,5 +12,5 @@ function* SetDataSaga() {
 }
 
 export function* watchSetDataSaga() {
-  yield takeLatest(SET_DATA_LOADING, SetDataSaga);
+  yield takeLatest(SET_DATA_LOADING, setDataSaga);
 }

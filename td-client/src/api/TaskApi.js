@@ -1,5 +1,5 @@
-import { handleResponse, handleError } from './ApitUtils';
 import axios from 'axios';
+
 //main api
 const baseUrl = 'http://localhost:3000/tasks/';
 
@@ -15,11 +15,12 @@ export function addTask(task) {
 
 //deleting tasks
 export function deleteTask(taskId) {
-  return axios.delete(`http://localhost:3000/tasks/${taskId}`);
+  return axios.delete(`${baseUrl}${taskId}`);
 }
+
 //editing tasks
 export function editTask(taskId, task) {
-  return axios.put(`http://localhost:3000/tasks/${taskId}`, {
+  return axios.put(`${baseUrl}${taskId}`, {
     name: task,
   });
 }

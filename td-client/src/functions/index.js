@@ -1,1 +1,0 @@
-export { GetData } from './GetData';

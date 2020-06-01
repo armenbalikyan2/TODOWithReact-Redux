@@ -9,7 +9,7 @@ const initialState = {
   id: [],
 };
 
-export function RemoveDataReducer(state = initialState, action) {
+export function removeDataReducer(state = initialState, action) {
   switch (action.type) {
     case REMOVE_DATA_LOADING:
       return {

@@ -3,10 +3,10 @@ import {
   GET_DATA_LOADING,
   getDataFailure,
   getDataSuccess,
-} from '../actions/GetDataActions';
-import { getTasks } from '../api/TaskApi';
+} from '../actions/getDataActions';
+import { getTasks } from '../api/taskApi';
 
-function* GetDataSaga() {
+function* getDataSaga() {
   const response = yield call(getTasks);
   const data = response.data;
   
@@ -18,5 +18,5 @@ function* GetDataSaga() {
 }
 
 export function* watchGetDataSaga() {
-  yield takeLatest(GET_DATA_LOADING, GetDataSaga);
+  yield takeLatest(GET_DATA_LOADING, getDataSaga);
 }

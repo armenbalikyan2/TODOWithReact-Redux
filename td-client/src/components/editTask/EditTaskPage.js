@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
-import './inputScreen.css';
+import './editScreen.css';
 import { connect } from 'react-redux';
-import { getDataLoading, setDataLoading } from '../../actions';
+import { editDataLoading, setDataLoading } from '../../actions';
 
-const AddingTaskPage = (props) => {
+const EditTaskPage = (props) => {
   const [form] = Form.useForm();
+
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
   };
 
   useEffect(() => {
-    props.getDataLoading();
+    props.editDataLoading();
   }, []);
 
   const onFinish = (values) => {
@@ -66,10 +67,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getDataLoading: () => dispatch(getDataLoading),
+    editDataLoading: () => dispatch(editDataLoading),
     setDataLoading: () => dispatch(setDataLoading),
   };
 }
 
 export let task = {};
-export default connect(mapStateToProps, mapDispatchToProps)(AddingTaskPage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditTaskPage);

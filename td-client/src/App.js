@@ -5,8 +5,10 @@ import InputPage from './components/addTask/AddingTaskPage';
 import ListScreen from './components/taskList/TaskListPage';
 import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
-import Header from './components/common/Header';
+import Header from './components/common/header/Header';
 import PageNotFound from './PageNotFound';
+import EditScreen from './components/editTask/EditTaskPage';
+
 
 function App() {
   return (
@@ -15,8 +17,9 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
-        <Route path="/addTask" component={InputPage} />
+        <Route path="/add-task" component={InputPage} />
         <Route path="/list" component={ListScreen} />
+        <Route path="/:type/:id" component={EditScreen} />
         <Route component={PageNotFound} />
       </Switch>
     </div>

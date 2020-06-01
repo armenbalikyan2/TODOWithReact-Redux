@@ -4,10 +4,17 @@
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
+    padding: 2px;
 }
 
-.editable-row .ant-form-explain {
-    position: absolute;
-    font-size: 12px;
-    margin-top: -4px;
+.ant-btn {
+    margin: 2px;
+}
+
+.Input1 {
+    margin-left: 700px;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
 }

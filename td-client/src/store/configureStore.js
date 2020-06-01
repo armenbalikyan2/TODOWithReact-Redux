@@ -7,6 +7,7 @@ import rootReducer from '../reducers';
 const sagaMiddleware = createSagaMiddleware();
 const middleWare = [sagaMiddleware, thunk];
 const store = createStore(rootReducer, compose(applyMiddleware(...middleWare)));
+
 initSagas(sagaMiddleware);
-console.info('Saga middleware implemented');
+
 export default store;

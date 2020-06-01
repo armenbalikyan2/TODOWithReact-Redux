@@ -1,13 +1,12 @@
-import { take, put, call, takeLatest } from 'redux-saga/effects';
-import { deleteTask, getTasks } from '../api/TaskApi';
+import {  put,  takeLatest } from 'redux-saga/effects';
+import { deleteTask } from '../api/taskApi';
 import {
   REMOVE_DATA_LOADING,
   removeDataSuccess,
-  removeDataFailure,
 } from '../actions';
 import { taskId } from '../components/taskList/TaskListPage';
 
-function* RemoveDataSaga() {
+function* removeDataSaga() {
   if (taskId !== undefined && taskId !== null) {
     const response = yield deleteTask(taskId);
     const data = response.data;
@@ -16,5 +15,5 @@ function* RemoveDataSaga() {
 }
 
 export function* watchRemoveDataSaga() {
-  yield takeLatest(REMOVE_DATA_LOADING, RemoveDataSaga);
+  yield takeLatest(REMOVE_DATA_LOADING, removeDataSaga);
 }

@@ -1,3 +1,3 @@
-export { watchGetDataSaga } from './GetDataSaga';
-export { watchSetDataSaga } from './SetDataSaga';
-export { watchRemoveDataSaga } from './RemoveDataSaga';
+export { watchGetDataSaga } from './getDataSaga';
+export { watchSetDataSaga } from './setDataSaga';
+export { watchRemoveDataSaga } from './removeDataSaga';
