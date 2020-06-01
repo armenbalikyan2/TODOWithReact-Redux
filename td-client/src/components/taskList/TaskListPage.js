@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Popconfirm, Form } from 'antd';
+import { Table, Popconfirm, Form, Spin } from 'antd';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
 import './listScreen.css';
@@ -17,9 +17,7 @@ const TaskListPage = (props) => {
 
   useEffect(() => {
     props.getDataLoading();
-    console.log(props.tasks ? props.tasks : undefined);
   }, []);
-  console.log(props.tasks)
 
   const edit = (record) => {
     form.setFieldsValue({
@@ -61,10 +59,7 @@ const TaskListPage = (props) => {
     selectedRowKeys,
     onChange: onSelectChange,
     hideDefaultSelections: true,
-    selections: [
-      Table.SELECTION_ALL,
-      Table.SELECTION_INVERT,
-    ],
+    selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
   };
 
   if (props.tasks) {
@@ -163,35 +158,38 @@ const TaskListPage = (props) => {
 
   return (
     <div className="listForm">
-      <Form
-        form={form}
-        component={false}
-        style={{
-          display: 'flexbox',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Table
-          rowKey={(data) => data.id}
-          rowSelection={rowSelection}
-          components={{
-            body: {
-              cell: EditableCell,
-            },
+      <Spin spinning={props.loading} size="default">
+        <Form
+          form={form}
+          component={false}
+          style={{
+            display: 'flexbox',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
-          bordered
-          dataSource={data}
-          columns={mergedColumns}
-        />
-      </Form>
+        >
+          <Table
+            rowKey={(data) => data.id}
+            rowSelection={rowSelection}
+            components={{
+              body: {
+                cell: EditableCell,
+              },
+            }}
+            bordered
+            dataSource={data}
+            columns={mergedColumns}
+          />
+        </Form>
+      </Spin>
     </div>
   );
 };
 
 function mapStateToProps(state) {
   return {
-    tasks: state.tasks.userData,
+    tasks: state.tasks.taskData,
+    loading: state.tasks.gettingUser,
   };
 }
 

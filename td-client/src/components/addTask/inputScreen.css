@@ -12,8 +12,9 @@
 }
 
 .Input1 {
-    margin-left: 700px;
-    width: 500px;
+    display: flexbox;
+    max-width: 400px;
+    margin: auto;
     justify-content: center;
     align-items: center;
     padding: 2px;

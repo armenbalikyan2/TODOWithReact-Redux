@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Spin } from 'antd';
 import './inputScreen.css';
 import { connect } from 'react-redux';
 import { getDataLoading, setDataLoading } from '../../actions';
@@ -15,10 +15,11 @@ const AddingTaskPage = (props) => {
     props.getDataLoading();
   }, []);
 
+
   const onFinish = (values) => {
     task = {
       id: props.tasks.length.toString(),
-      name: values.note.toString(),
+      name: values.task.toString(),
     };
 
     props.setDataLoading();
@@ -38,29 +39,36 @@ const AddingTaskPage = (props) => {
 
   return (
     <div className="addTask">
-      <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
-        <Form.Item name="task" className="Input1" rules={[{ required: true }]}>
-          <Input placeholder="Add task" />
-        </Form.Item>
-        <Form.Item className="Input1">
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-          <Button htmlType="button" onClick={onReset}>
-            Reset
-          </Button>
-          <Button type="link" htmlType="button" onClick={onFill}>
-            Fill form
-          </Button>
-        </Form.Item>
-      </Form>
+      <Spin spinning={props.loading} size='default'>
+        <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+          <Form.Item
+            name="task"
+            className="Input1"
+            rules={[{ required: true }]}
+          >
+            <Input placeholder="Add task" />
+          </Form.Item>
+          <Form.Item className="Input1">
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+            <Button htmlType="button" onClick={onReset}>
+              Reset
+            </Button>
+            <Button type="link" htmlType="button" onClick={onFill}>
+              Fill form
+            </Button>
+          </Form.Item>
+        </Form>
+      </Spin>
     </div>
   );
 };
 
 function mapStateToProps(state) {
   return {
-    tasks: state.tasks.userData,
+    tasks: state.tasks.taskData,
+    loading: state.tasks.gettingUser,
   };
 }
 

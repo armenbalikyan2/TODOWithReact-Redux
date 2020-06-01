@@ -1,35 +1,35 @@
 import React from 'react';
-import { Breadcrumb } from 'antd';
+import { Menu } from 'antd';
 import {
   UnorderedListOutlined,
   PlusOutlined,
   HomeFilled,
 } from '@ant-design/icons';
 import './headerStyle.css';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+const HeaderComponent = () => {
   return (
-    <div>
-      <header />
-      <nav>
-        <div>
-          <Breadcrumb>
-            <Breadcrumb.Item href="/">
-              <HomeFilled />
-              <span>Home</span>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item href="/list">
-              <UnorderedListOutlined />
-              <span>Task List</span>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item href="/add-task">
-              <PlusOutlined />
-              <span>Add Task</span>
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        </div>
-      </nav>
-    </div>
+    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+      <Menu.Item key="1">
+        <Link to="/">
+          <HomeFilled />
+          <span>Home</span>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Link to="/list">
+          <UnorderedListOutlined />
+          <span>Task List</span>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="3">
+        <Link to="/add-task">
+          <PlusOutlined />
+          <span>Add Task</span>
+        </Link>
+      </Menu.Item>
+    </Menu>
   );
 };
-export default Header;
+export default HeaderComponent;
