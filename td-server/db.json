@@ -1,39 +1,35 @@
 {
-  "tasks": [
-    {
-      "task": {
-        "id": "1",
-        "name": "Task 1"
-      },
-      "id": "5qf5Hsv"
+  "tasks": [{
+      "name": "Task 1",
+      "id": 1
     },
     {
-      "task": {
-        "id": "2",
-        "name": "Task 2"
-      },
-      "id": "5qf5Hjv"
+      "name": "Task 2",
+      "id": 2
     },
     {
-      "task": {
-        "id": "3",
-        "name": "Task 3"
-      },
-      "id": "5qf5Hkv"
+      "name": "Task 3",
+      "id": 3
     },
     {
-      "task": {
-        "id": "3",
-        "name": "Task 4"
-      },
-      "id": "J6y2nzb"
+      "name": "Task 4",
+      "id": 4
     },
     {
-      "task": {
-        "id": "4",
-        "name": "Task 5"
-      },
-      "id": "mMhcnYw"
+      "name": "Task 5",
+      "id": 5
+    },
+    {
+      "name": "Task 6",
+      "id": 6
+    },
+    {
+      "name": "Task 7",
+      "id": 7
+    },
+    {
+      "name": "Task 9",
+      "id": 8
     }
   ]
 }

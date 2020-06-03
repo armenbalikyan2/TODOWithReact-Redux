@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  removingData: false,
+  removingTask: false,
   id: [],
 };
 
@@ -14,18 +14,18 @@ export function removeDataReducer(state = initialState, action) {
     case REMOVE_DATA_LOADING:
       return {
         ...state,
-        removingData: true,
+        removingTask: true,
       };
     case REMOVE_DATA_SUCCESS:
       return {
         ...state,
-        removingData: false,
+        removingTask: false,
         id: action.payload,
       };
     case REMOVE_DATA_FAILURE:
       return {
         ...state,
-        removingData: false,
+        removingTask: false,
       };
     default:
       return state;

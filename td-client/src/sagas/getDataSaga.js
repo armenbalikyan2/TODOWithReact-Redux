@@ -9,7 +9,7 @@ import { getTasks } from '../api/taskApi';
 function* getDataSaga() {
   const response = yield call(getTasks);
   const data = response.data;
-  
+
   if (response.status !== 200) {
     yield take(getDataFailure);
   }

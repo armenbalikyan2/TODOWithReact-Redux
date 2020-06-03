@@ -14,18 +14,18 @@ import {
       case EDIT_DATA_LOADING:
         return {
           ...state,
-          edittingUser: true,
+          edittingTask: true,
         };
       case EDIT_DATA_SUCCESS:
         return {
           ...state,
-          edittingUser: false,
+          edittingTask: false,
           taskData: action.payload,
         };
       case EDIT_DATA_FAILURE:
         return {
           ...state,
-          edittingUser: false,
+          edittingTask: false,
         };
       default:
         return state;

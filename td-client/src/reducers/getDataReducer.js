@@ -14,18 +14,18 @@ export function getDataReducer(state = initialState, action) {
     case GET_DATA_LOADING:
       return {
         ...state,
-        gettingUser: true,
+        gettingTask: true,
       };
     case GET_DATA_SUCCESS:
       return {
         ...state,
-        gettingUser: false,
+        gettingTask: false,
         taskData: action.payload,
       };
     case GET_DATA_FAILURE:
       return {
         ...state,
-        gettingUser: false,
+        gettingTask: false,
       };
     default:
       return state;

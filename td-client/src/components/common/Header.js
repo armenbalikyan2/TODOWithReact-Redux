@@ -5,7 +5,6 @@ import {
   PlusOutlined,
   HomeFilled,
 } from '@ant-design/icons';
-import './headerStyle.css';
 import { Link } from 'react-router-dom';
 
 const HeaderComponent = () => {

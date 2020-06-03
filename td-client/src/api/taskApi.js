@@ -10,7 +10,7 @@ export function getTasks() {
 
 //setting tasks
 export function addTask(task) {
-  return axios.post(baseUrl, { task });
+  return axios.post(baseUrl, { name: task.name });
 }
 
 //deleting tasks
@@ -19,8 +19,8 @@ export function deleteTask(taskId) {
 }
 
 //editing tasks
-export function editTask(taskId, task) {
+export function editTask(taskId, taskName) {
   return axios.put(`${baseUrl}${taskId}`, {
-    name: task,
+    name: taskName,
   });
 }

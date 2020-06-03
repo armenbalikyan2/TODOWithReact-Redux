@@ -1,58 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Popconfirm, Form, Spin } from 'antd';
-import { connect } from 'react-redux';
+import { Table, Popconfirm, Spin } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'antd';
 import './listScreen.css';
-import { getDataLoading, removeDataLoading } from '../../actions';
+import { removeDataLoading, getDataLoading } from '../../actions';
 import { EditableCell } from '../common/EditableCell';
 
-export let taskId;
-export let editingtask;
 
 const TaskListPage = (props) => {
-  const [form] = Form.useForm();
+  const dispatch = useDispatch();
   const [selectedRowKeys, setSelectedRowKeys] = useState();
-  const [editingKey, setEditingKey] = useState('');
-  const isEditing = (record) => record.key === editingKey;
+  const tasks = useSelector((state) => state.tasks.taskData);
+  const loading = useSelector((state) => state.tasks.gettingTask);
+  const getTasksLoading = () => dispatch(getDataLoading);
+  const removeTasksLoading = (payload) => dispatch(removeDataLoading(payload));
 
   useEffect(() => {
-    props.getDataLoading();
+    getTasksLoading();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const edit = (record) => {
-    form.setFieldsValue({
-      name: '',
-      age: '',
-      address: '',
-      ...record,
-    });
-    setEditingKey(record.key);
-  };
-
-  const cancel = () => {
-    setEditingKey('');
-  };
-
-  const save = async (key) => {
-    try {
-      const row = await form.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, { ...item, ...row });
-        setEditingKey('');
-      } else {
-        setEditingKey('');
-      }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
-    }
+  const handleEdit = (record) => {
+    props.history.push(`/edit/${record}`);
   };
 
   const onSelectChange = () => {
     setSelectedRowKeys(selectedRowKeys);
+  };
+
+  const handleDelete = (key) => {
+    removeTasksLoading(key);
+    window.location.reload(false);
   };
 
   const rowSelection = {
@@ -60,17 +38,6 @@ const TaskListPage = (props) => {
     onChange: onSelectChange,
     hideDefaultSelections: true,
     selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
-  };
-
-  if (props.tasks) {
-    var data = [];
-    props.tasks.map((item) => data.push(item.task));
-  }
-
-  const handleDelete = (key) => {
-    taskId = key;
-    props.removeDataLoading();
-    window.location.reload(false);
   };
 
   const columns = [
@@ -81,55 +48,33 @@ const TaskListPage = (props) => {
       editable: true,
     },
     {
-      title: 'operation',
+      title: 'Operation',
       dataIndex: 'operation',
-      render: (_, record) => {
-        const editable = isEditing(record);
-        return editable ? (
-          <span>
-            <Button
-              onClick={() => save(record.key)}
-              style={{
-                marginRight: 8,
-              }}
-              type="primary"
-              size="small"
-              htmlType="save"
-            >
-              Save
-            </Button>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <Button type="danger" size="small" htmlType="candel">
-                Cancel
-              </Button>
-            </Popconfirm>
-          </span>
-        ) : (
-          <Button
-            disabled={editingKey !== ''}
-            onClick={() => edit(record)}
-            type="primary"
-            size="small"
-            htmlType="edit"
+      render: (text, record) =>
+        tasks.length >= 1 ? (
+          <Popconfirm
+            title="Sure to edit?"
+            key={Math.random.toString()}
+            onConfirm={() => {
+              handleEdit([record.name, record.id]);
+            }}
           >
-            Edit
-          </Button>
-        );
-      },
+            <Button type="primary" size="small" htmlType="edit">
+              Edit
+            </Button>
+          </Popconfirm>
+        ) : null,
       width: '10%',
     },
     {
       title: 'Operation',
       dataIndex: 'operation',
       render: (text, record) =>
-        props.tasks.length >= 1 ? (
+        tasks.length >= 1 ? (
           <Popconfirm
             title="Sure to delete?"
             key={Math.random.toString()}
-            onConfirm={() => {
-              let value = props.tasks.filter((value) => value.task === record);
-              handleDelete(value[0].id);
-            }}
+            onConfirm={() => handleDelete(record.id)}
           >
             <Button type="danger" size="small" htmlType="delete">
               Delete
@@ -158,45 +103,23 @@ const TaskListPage = (props) => {
 
   return (
     <div className="listForm">
-      <Spin spinning={props.loading} size="default">
-        <Form
-          form={form}
-          component={false}
-          style={{
-            display: 'flexbox',
-            justifyContent: 'center',
-            alignItems: 'center',
+      <Spin spinning={loading} size="default">
+        <Table
+          pagination={false}
+          rowKey={(data) => data.id}
+          rowSelection={rowSelection}
+          components={{
+            body: {
+              cell: EditableCell,
+            },
           }}
-        >
-          <Table
-            rowKey={(data) => data.id}
-            rowSelection={rowSelection}
-            components={{
-              body: {
-                cell: EditableCell,
-              },
-            }}
-            bordered
-            dataSource={data}
-            columns={mergedColumns}
-          />
-        </Form>
+          bordered
+          dataSource={tasks}
+          columns={mergedColumns}
+        />
       </Spin>
     </div>
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    tasks: state.tasks.taskData,
-    loading: state.tasks.gettingUser,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getDataLoading: () => dispatch(getDataLoading),
-    removeDataLoading: () => dispatch(removeDataLoading),
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(TaskListPage);
+export default TaskListPage;

@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  settingData: false,
+  settingTask: false,
   taskData: [],
 };
 
@@ -14,18 +14,18 @@ export function setDataReducer(state = initialState, action) {
     case SET_DATA_LOADING:
       return {
         ...state,
-        settingData: true,
+        settingTask: true,
       };
     case SET_DATA_SUCCESS:
       return {
         ...state,
-        settingData: false,
+        settingTask: false,
         taskData: action.payload,
       };
     case SET_DATA_FAILURE:
       return {
         ...state,
-        settingData: false,
+        settingTask: false,
       };
     default:
       return state;

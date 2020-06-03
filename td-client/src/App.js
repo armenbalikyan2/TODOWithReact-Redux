@@ -6,9 +6,8 @@ import ListScreen from './components/taskList/TaskListPage';
 import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
 import PageNotFound from './PageNotFound';
-import EditScreen from './components/editTask/EditTaskPage';
 import { Layout } from 'antd';
-import HeaderComponent from './components/common/header/Header';
+import HeaderComponent from './components/common/Header';
 
 const { Header, Content, Footer } = Layout;
 function App() {
@@ -24,7 +23,7 @@ function App() {
             <Route path="/about" component={AboutPage} />
             <Route path="/add-task" component={InputPage} />
             <Route path="/list" component={ListScreen} />
-            <Route path="/:type/:id" component={EditScreen} />
+            <Route path="/:type/:id" component={InputPage} />
             <Route component={PageNotFound} />
           </Switch>
         </Content>
