@@ -45,12 +45,6 @@ const AddingTaskPage = (props) => {
     form.resetFields();
   };
 
-  const onFill = () => {
-    form.setFieldsValue({
-      note: 'Task...',
-    });
-  };
-
   return (
     <div className="addTask">
       <Spin spinning={loading} size="default">
@@ -72,9 +66,6 @@ const AddingTaskPage = (props) => {
             </Button>
             <Button htmlType="button" onClick={onReset}>
               Reset
-            </Button>
-            <Button type="link" htmlType="button" onClick={onFill}>
-              Fill form
             </Button>
           </Form.Item>
         </Form>
